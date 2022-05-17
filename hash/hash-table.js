@@ -4,6 +4,7 @@ class HashTable {
     this.buckets = Array(defaultHashTableSize).fill(null);
     this.keys = {};
   }
+
   hash(key) {
     const hash = Array.from(key).reduce(
       (acc, keySymbol) => acc + keySymbol.charCodeAt(0),
@@ -11,6 +12,7 @@ class HashTable {
     );
     return hash % this.buckets.length;
   }
+
   set(key, value) {
     const keyHash = this.hash(key);
     this.keys[key] = keyHash;
@@ -40,9 +42,3 @@ class HashTable {
     }
   }
 }
-
-const hashTable = new HashTable();
-hashTable.set("fav", "toss");
-hashTable.set("avf", "baemin");
-hashTable.delete("avf");
-console.log(hashTable);
