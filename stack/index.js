@@ -1,4 +1,4 @@
-class Stack {
+export class Stack {
   constructor() {
     // 배열이나, 연결 리스트로 사용해도 좋다.
     this.stack = [];
