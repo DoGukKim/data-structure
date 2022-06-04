@@ -24,8 +24,7 @@ class HashTable {
   }
 
   get(key) {
-    const value = this.buckets[this.hash(key)].find((i) => i[0] === key)[1];
-    return value ?? null;
+    return this.buckets[this.hash(key)].find((i) => i[0] === key)[1] ?? null;
   }
 
   delete(key) {
