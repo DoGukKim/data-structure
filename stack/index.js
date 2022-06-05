@@ -18,7 +18,6 @@ export class Stack {
   }
 
   isEmpty() {
-    if (this.stack.length > 0) return false;
-    return true;
+    return this.stack.length > 0;
   }
 }
