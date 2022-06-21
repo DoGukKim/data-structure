@@ -21,9 +21,6 @@ class BinarySearchTree {
     }
   }
 
-  // 노드 삭제
-  // 추 후 업데이트
-
   // 노드 찾기
   find(value) {
     if (this.value === value) return this;
