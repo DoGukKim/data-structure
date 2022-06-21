@@ -1,4 +1,5 @@
 const DFS = (graph, source) => {
+  if (graph === null) return null;
   const stack = [source];
 
   while (stack.length > 0) {

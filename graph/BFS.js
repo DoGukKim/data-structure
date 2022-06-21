@@ -1,4 +1,5 @@
 const BFS = (graph, source) => {
+  if (graph === null) return [];
   const queue = [source];
 
   while (queue.length > 0) {
