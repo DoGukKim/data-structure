@@ -13,24 +13,18 @@ export class SinglyLikedList {
 
   // 맨 앞에 노드 삽입
   prepend(value) {
-    if (this.head === null) {
-      this.head = new Node(value);
-      this.size++;
-      return;
-    }
+    if (this.head === null) this.head = new Node(value);
     this.head = new Node(value, this.head);
-    this.size++;
+    this.size += 1;
   }
 
   // 맨 뒤에 노드 삽입
   push(value) {
-    if (this.head === null) return this.prepend(value);
+    if (this.head === null) this.prepend(value);
     let current = this.head;
-    while (current.next !== null) {
-      current = current.next;
-    }
+    while (current.next !== null) current = current.next;
     current.next = new Node(value);
-    this.size++;
+    this.size += 1;
   }
 
   // value로 노드 삭제
@@ -99,7 +93,7 @@ export class SinglyLikedList {
   indexOf(value) {
     const current = this.head;
     for (let i = 0; i < this.size && current !== null; i++) {
-      if (current.value === index) return i;
+      if (current.value === value) return i;
       current = current.next;
     }
     return -1;

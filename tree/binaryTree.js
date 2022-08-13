@@ -36,4 +36,11 @@ class BinaryTree {
       if (current.right) queue.push(current.right);
     }
   }
+
+  includes(root, target) {
+    if (root === null) return false;
+    return (
+      this.includes(root.left, target) || this.includes(root.right, target)
+    );
+  }
 }
