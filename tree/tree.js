@@ -1,21 +1,20 @@
-class Tree {
-  constructor(value) {
+class TreeNode {
+  constructor(value = null) {
     this.value = value;
     this.children = [];
   }
 
-  // 노드 삽입
   insert(value) {
-    const node = new Tree(value);
-    this.children.push(node);
+    this.children.push(new TreeNode(value));
   }
 
-  // 값 유 무
   contain(value) {
-    if (this.value === value) return true;
+    if (this.value === value) return value;
+
     for (let i = 0; i < this.children.length; i++) {
       if (this.children[i].contain(value)) return true;
     }
+
     return false;
   }
 }
