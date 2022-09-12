@@ -1,6 +1,6 @@
-import Node from "./binaryTreeNode.js";
+import Node from "./tree/binarySearchTree/binaryTreeNode.js";
 
-class BinarySearchTree {
+export default class BinarySearchTree {
   constructor(key, value = key) {
     this.root = new Node(key, value);
   }
@@ -47,24 +47,18 @@ class BinarySearchTree {
     return result;
   }
 
-  insert(key, value = key) {
-    let node = this.root;
-    while (true) {
-      if (node.key === key) return false;
-      if (node.key > key) {
-        // value가 root의 value 보다 작을 때
-        if (node.left !== null) node = node.left;
-        else {
-          node.left = new Node(key, value, node);
-          return true;
-        }
-      } else if (node.key < key) {
-        // value가 root의 value 보다 클 때
-        if (node.right !== null) node = node.right;
-        else {
-          node.right = new Node(key, value, node);
-          return true;
-        }
+  insert(key, value = key, node = this.root) {
+    if (key < node.key) {
+      if (node.left === null) {
+        node.left = new Node(key, value, node);
+      } else {
+        this.insert(key, value, node.left);
+      }
+    } else if (key > node.key) {
+      if (node.right === null) {
+        node.right = new Node(key, value, node);
+      } else {
+        this.insert(key, value, node.right);
       }
     }
   }
@@ -74,16 +68,31 @@ class BinarySearchTree {
     return isHas;
   }
 
-  find(key) {
-    const value = this.postOrder().find((value) => value === key);
-    return value;
+  remove(key, node = this.root) {
+    if (!node) return null;
+    else if (key < node.key) {
+      node.left = this.remove(key, node.left);
+      return node;
+    } else if (key > node.key) {
+      node.right = this.remove(key, node.right);
+      return node;
+    } else if (key === node.key) {
+      if (!node.left) return node.right;
+      else if (!node.right) return node.left;
+      else {
+        node.right = this.lift(node.right, node);
+        return node;
+      }
+    }
   }
 
-  // pending
-  remove() {}
+  lift(node, nodeToRemove) {
+    if (node.left) {
+      node.left = this.lift(node.left, nodeToRemove);
+      return node;
+    } else {
+      nodeToRemove.key = node.key;
+      return node.right;
+    }
+  }
 }
-
-const bst = new BinarySearchTree(30);
-bst.insert(10);
-bst.insert(40);
-bst.insert(6);
