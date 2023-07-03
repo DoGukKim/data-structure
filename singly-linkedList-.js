@@ -1,11 +1,11 @@
-export class Node {
+class Node {
   constructor(value, next = null) {
     this.value = value;
     this.next = next;
   }
 }
 
-export class SinglyLikedList {
+class SingleLinkList {
   constructor() {
     this.head = null;
     this.size = 0;
