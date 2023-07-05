@@ -11,10 +11,23 @@ export class SingleLinkList {
     this.size = 0;
   }
 
-  push(value) {
+  prepend(value) {
     if (!this.head) {
       this.head = new Node(value);
       this.size++;
+      return null;
+    }
+
+    let current = this.head;
+    this.head = new Node(value);
+    this.head.next = current;
+    this.size++;
+  }
+
+  push(value) {
+    if (!this.head) {
+      this.prepend();
+
       return null;
     }
 
@@ -41,6 +54,17 @@ export class SingleLinkList {
     this.size--;
 
     return null;
+  }
+
+  shift() {
+    if (!this.head) return null;
+
+    const result = this.head;
+    this.head = this.head.next;
+    result.next = null;
+    this.size--;
+
+    return result;
   }
 
   size() {

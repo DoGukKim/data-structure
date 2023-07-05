@@ -11,14 +11,14 @@ export class Stack {
     return null;
   }
 
-  size() {
-    this.size();
+  pop() {
+    this.pop();
 
     return null;
   }
 
-  pop() {
-    this.pop();
+  size() {
+    this.size();
 
     return null;
   }
