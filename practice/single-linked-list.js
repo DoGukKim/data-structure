@@ -8,35 +8,43 @@ class Node {
 export class SingleLinkList {
   constructor() {
     this.head = null;
+    this.size = 0;
   }
 
   push(value) {
     if (!this.head) {
       this.head = new Node(value);
-      return;
+      this.size++;
+      return null;
     }
 
     let current = this.head;
-    while (!current.next) {
+    while (current.next !== null) {
       current = current.next;
     }
     current.next = new Node(value);
+    this.size++;
+
+    return null;
+  }
+
+  pop() {
+    if (!this.head) return null;
+
+    let current = this.head;
+    let prev = null;
+    while (current.next !== null) {
+      current = current.next;
+      prev = current;
+    }
+    prev.next = null;
+    this.size--;
 
     return null;
   }
 
   size() {
-    if (!this.head) return 0;
-
-    let current = this.head;
-    let count = 0;
-
-    while (!current.next) {
-      current = current.next;
-      count++;
-    }
-
-    return count;
+    return this.size;
   }
 
   clear() {
