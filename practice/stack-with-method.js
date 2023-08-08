@@ -1,0 +1,23 @@
+export class Stack {
+  constructor() {
+    // 배열이나, 연결 리스트로 사용해도 좋다.
+    this.stack = [];
+  }
+
+  push(value) {
+    this.stack.push(value);
+  }
+
+  pop() {
+    return this.stack.pop();
+  }
+
+  peek() {
+    if (this.isEmpty()) return null;
+    return this.stack[this.stack.length - 1];
+  }
+
+  isEmpty() {
+    return this.stack.length > 0;
+  }
+}

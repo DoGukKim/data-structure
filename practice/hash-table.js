@@ -21,7 +21,7 @@ class HashTable {
     if (!this.table[hashKey]) {
       this.table[hashKey] = [[key, value]];
     } else {
-      const item = this.table.find((item) => item[0] === key);
+      const item = this.table[hashKey].find((item) => item[0] === key);
 
       if (!item) {
         this.table[hashKey].push([key, value]);
@@ -36,9 +36,15 @@ class HashTable {
 
     if (!this.table[hashKey]) return null;
     else {
-      const item = this.table.find((item) => item[0] === key);
+      const item = this.table[hashKey].find((item) => item[0] === key);
 
       return item[1];
     }
   }
 }
+
+const table = new HashTable(30);
+table.set("evil", 10);
+table.set("evil", 3);
+const some = table.get("evil");
+console.log(some);
