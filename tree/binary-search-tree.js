@@ -80,21 +80,50 @@ class BinarySearchTree {
 
     if (currentNode === null) return null;
 
-    // 삭제 노드가 자식이 없는 경우
+    // 1. 삭제 노드에 하위 노드가 없는 경우
     if (currentNode.left === null && currentNode.right === null) {
       // 부모 노드가 null이라는 것은, 현재 노드가 root임을 의미
       if (parentNode === null) {
         this.root = null;
+      } else if (value < parentNode.value) {
+        parent.left = null;
+      } else {
+        parent.right = null;
       }
-      //   TODO: 마저 구현
+    }
+
+    // 2. 삭제 노드에 하위 노드가 1개 있는 경우
+    else if (currentNode.left === null || currentNode.right === null) {
+      const child =
+        currentNode.left !== null ? currentNode.left : currentNode.right;
+      if (parent === null) {
+        this.root = child;
+      } else if (value < parent.value) {
+        parent.left = child;
+      } else {
+        parent.right = child;
+      }
+    }
+
+    // 3. 삭제 노드에 하위 노드가 2개 있는 경우
+    else {
+      const successor = this.findInOrderSuccessor(currentNode); // 후속자 노드
+      const successorValue = successor.value;
+      this.delete(successorValue);
+
+      currentNode.value = successorValue;
     }
   }
+
+  findInOrderSuccessor(node) {
+    let currentNode = node.right;
+    let parent = node;
+
+    while (currentNode !== null) {
+      parent = currentNode;
+      currentNode = currentNode.left;
+    }
+
+    return parent;
+  }
 }
-
-const bt = new BinarySearchTree();
-bt.insert(3);
-bt.insert(1);
-bt.insert(4);
-
-console.log(bt);
-console.log(bt.search(4));
